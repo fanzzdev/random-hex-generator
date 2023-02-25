@@ -1,1 +1,1 @@
-# random-hex-generator
+RANDOM HEX GENERATOR
