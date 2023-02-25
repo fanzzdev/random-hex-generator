@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>FANZZ DEV | RANDOM HEX GENERATOR</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <style>
+      @font-face {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        src: url("Poppins-Regular.otf") format("opentype");
+      }
+
+      :root {
+        --white: #ffffff;
+        --primary: hsl(221, 83.2%, 53.3%);
+        --secondary: hsl(217, 91.2%, 59.8%);
+        --slate-50: hsl(210, 40%, 98%);
+        --slate-100: hsl(210, 40%, 96.1%);
+        --slate-200: hsl(214, 31.8%, 91.4%);
+        --slate-900: hsl(222, 47.4%, 11.2%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: "Poppins", Sans-Serif;
+        font-size: 16px;
+        scroll-behavior: smooth;
+        background-color: var(--slate-100);
+        color: var(--slate-900);
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--slate-900);
+      }
+
+      header {
+        background-color: var(--slate-50);
+        padding: 20px 0;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      p {
+      }
+
+      button {
+        font-size: 16px;
+        font-family: "Poppins", Sans-Serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 8px 12px;
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+        border: 1px solid #3b83f6;
+        border-radius: 4px;
+        transition: all 300ms;
+      }
+
+      button:hover {
+        background-color: var(--secondary);
+      }
+
+      .text-result {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .box {
+        padding: 16px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: var(--slate-50);
+        margin: 16px 0;
+      }
+
+      #text-result {
+        font-family: Monospace;
+      }
+
+      #square {
+        width: 100%;
+        height: 300px;
+        border-radius: 4px;
+        border: 2px solid var(--slate-200);
+      }
+
+      footer p {
+        text-align: center;
+        margin: 28px 0;
+      }
+
+      #tes {
+        background-color: #32a0ef;
+        width: 200px;
+        height: 200px;
+      }
+
+      .bi {
+        font-weight: bold;
+      }
+
+      @media only screen and (max-width: 767px) {
+        p {
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>RANDOM HEX GENERATOR</h1>
+    </header>
+
+    <div class="container">
+      <div class="box">
+        <p>
+          Random Hex Generator adalah sebuah program yang memungkinkan kita
+          untuk mendapatkan kode warna hexadecimal secara acak.
+        </p>
+      </div>
+      <div class="box">
+        <div class="text-result">
+          <button onclick="getHex()">Generate</button>
+          <p id="text-result"></p>
+          <button onclick="copyText()">
+            <i class="bi bi-clipboard"></i>
+          </button>
+        </div>
+        <div id="square"></div>
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        <p>Made with &hearts; by <a href="">Ahmad Irfansyah</a></p>
+      </div>
+    </footer>
+    <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "></script>
+    <script>
+      function getHex() {
+        let square = document.getElementById("square");
+        const randomHex = () =>
+          `#${Math.floor(Math.random() * 0xffffff)
+            .toString(16)
+            .padEnd(6, "0")}`;
+        let resultHex = randomHex();
+        document.getElementById("text-result").innerHTML = resultHex;
+        document.getElementById("square").style.backgroundColor = resultHex;
+        document.getElementById("square").style.border = "none";
+        document.getElementById("square").innerHTML = "";
+      }
+      function copyText() {
+        /* Mengambil elemen HTML yang ingin dicopy */
+        const textToCopy = document.getElementById("text-result");
+        swal(`${textToCopy.innerText} Telah disalin ke clipboard`);
+        /* Membuat objek textarea baru untuk menyimpan teks yang ingin dicopy */
+        const textarea = document.createElement("textarea");
+        textarea.value = textToCopy.innerText;
+
+        /* Menambahkan objek textarea ke dalam dokumen */
+        document.body.appendChild(textarea);
+
+        /* Memilih teks pada objek textarea */
+        textarea.select();
+
+        /* Menyalin teks yang sudah dipilih ke dalam clipboard */
+        document.execCommand("copy");
+
+        /* Menghapus objek textarea dari dokumen */
+        document.body.removeChild(textarea);
+      }
+    </script>
+  </body>
+</html>
